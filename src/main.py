@@ -21,7 +21,7 @@ def inputCredit():
     credit = int(input("Masukkan credit: "))
     if(credit<=0):
         print("Credit tidak valid!")
-        inputCredit()
+        return inputCredit()
     return credit
 
 def showItem():
@@ -63,24 +63,25 @@ def printReceipt(credit, userList):
             check = False
     print(credit)
 
-print("Ini adalah vending machine minuman, silakan pilih menu")
-inventory, userList = initialize()
-credit = inputCredit()
-initCredit = credit
-sum = 0
-Act = True
-count = 0
-while(Act == True):
-    print("Credit tersisa: ", credit)
-    print("Total Pembelian: ", sum)
-    selection = displayMenu(inventory)
-    if(selection == 1):
-        credit = credit + inputCredit()
-    elif(selection == 2):
+while(True):
+    print("Ini adalah vending machine minuman, silakan pilih menu")
+    inventory, userList = initialize()
+    credit = inputCredit()
+    initCredit = credit
+    sum = 0
+    Act = True
+    count = 0
+    while(Act == True):
         print("Credit tersisa: ", credit)
-        sum, count, userList = selItem(inventory, sum, credit, count, userList)
-        credit = initCredit - sum
-    elif(selection == 3):
-        if(checkActivity()):
-            printReceipt(credit, userList)
-            Act = False
+        print("Total Pembelian: ", sum)
+        selection = displayMenu(inventory)
+        if(selection == 1):
+            credit = credit + inputCredit()
+        elif(selection == 2):
+            print("Credit tersisa: ", credit)
+            sum, count, userList = selItem(inventory, sum, credit, count, userList)
+            credit = initCredit - sum
+        elif(selection == 3):
+            if(checkActivity()):
+                printReceipt(credit, userList)
+                Act = False
