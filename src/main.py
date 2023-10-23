@@ -1,8 +1,7 @@
 # Deskripsi: Program Utama Tugas Besar Simulasi Vending Machine
-# Test commit
 
 def clearScreen():
-    for i in range(20):
+    for i in range(50):
         print()
 
 def initialize():
@@ -16,7 +15,6 @@ def displayMenu(inventory):
     print("1. Input Credit\n2. Pilih Barang\n3. Ambil Kembalian dan Tutup Sesi")
     selection = int(input("Masukkan angka opsi: "))
     return selection
-    
 
 def inputCredit():
     credit = int(input("Masukkan credit: "))
@@ -31,13 +29,13 @@ def showItem():
         print(f"{i+1}. {inventory[0][i]} p: {inventory[1][i]} q: {inventory[2][i]}", end="")
         if(inventory[2][i]==0):
             print(" Habis!")
-        print()
-        
+        print()        
 
 def selItem(inventory, sum, credit, count, userList):
     showItem()
     selection = int(input("Nomor item yang ingin dibeli: "))
-    if(inventory[1][selection-1]<=credit-sum):
+    print(credit)
+    if(inventory[1][selection-1]<=credit):
         sum = sum + inventory[1][selection-1]
         count += 1
         userList[count] = selection
@@ -49,40 +47,47 @@ def checkActivity():
     print("Lanjut sesi?\n1. Ya\n2. Tidak, tutup sesi, dan ambil kembalian")
     opt = int(input("Masukkan angka opsi: "))
     if(opt==1):
-        act = True
-    else:
         act = False
+    else:
+        act = True
     return act
 
 def printReceipt(credit, userList):
     i = 0
     check = True
+    print(f"Item yang dibeli: ")
     while(check == True):
         i+=1
-        print(inventory[0][userList[i]-1])
+        print(f"{i+1}. {inventory[0][userList[i]-1]}, ")
         if(userList[i+1]==0):
             check = False
-    print(credit)
+    print(f"Total Pembelian : {sum}")
+    print(f"Kembalian Credit: {credit}")
 
 while(True):
     print("Ini adalah vending machine minuman, silakan pilih menu")
     inventory, userList = initialize()
     credit = inputCredit()
-    initCredit = credit
+    totalCred = credit
     sum = 0
     Act = True
     count = 0
     while(Act == True):
-        print("Credit tersisa: ", credit)
-        print("Total Pembelian: ", sum)
+        clearScreen()
+        print(f"Credit tersisa: {credit}")
+        print(f"Total Pembelian: {sum}")
         selection = displayMenu(inventory)
         if(selection == 1):
-            credit = credit + inputCredit()
+            clearScreen()
+            totalCred = totalCred + inputCredit()
+            credit = totalCred - sum 
         elif(selection == 2):
+            clearScreen()
             print("Credit tersisa: ", credit)
             sum, count, userList = selItem(inventory, sum, credit, count, userList)
-            credit = initCredit - sum
+            credit = totalCred - sum
         elif(selection == 3):
+            clearScreen()
             if(checkActivity()):
                 printReceipt(credit, userList)
                 Act = False
