@@ -102,6 +102,8 @@ def printReceipt(credit, userList):
     print(f"Total Pembelian : {sum}")
     print(f"Kembalian Credit: {credit}\n\n")
 
+# Fungsi printAscii
+# Deskripsi: Fungsi untuk mengoutput ASCII ART sebagai dekorasi interface
 def printAscii():
     ascii_art = '''
      __   __           _ _             __  __         _    _          
@@ -110,7 +112,8 @@ def printAscii():
        \_/\___|_||_\__,_|_|_||_\__, | |_|  |_\__,_\__|_||_|_|_||_\___|
                                |___/                                  
     '''
-    print(ascii_art)
+    print("\033[1;33;40m", ascii_art)
+    print()
 
 # Proses Utama
 
