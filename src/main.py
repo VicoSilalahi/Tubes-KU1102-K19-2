@@ -8,6 +8,7 @@ def initialize():
     inventory = [["Fanta", "Coca Cola", "Nescafe", "Aqua"], # Item at 0
                  [5000, 7000, 9000, 3000], # Price at 1
                  [10, 8, 12, 15]] # Quantity at 2
+    
     userList = [0]*100
     return inventory, userList
 
@@ -73,9 +74,10 @@ def printReceipt(credit, userList):
     print(f"Total Pembelian : {sum}")
     print(f"Kembalian Credit: {credit}\n\n")
 
+inventory, userList = initialize()
+
 while(True):
     print("Ini adalah vending machine minuman, silakan pilih menu")
-    inventory, userList = initialize()
     credit = inputCredit()
     totalCred = credit
     sum = 0
