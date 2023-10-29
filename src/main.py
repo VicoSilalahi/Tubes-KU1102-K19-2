@@ -39,7 +39,7 @@ def displayMenu(inventory):
 # Fungsi inputCredit()
 # Deskrispi: Fungsi untuk menambah credit setelah pengisian credit awal
 def inputCredit():
-    credit = int(input("Masukkan credit: "))
+    credit = int(input("Masukkan credit: Rp "))
     if(credit<=0):
         print("Credit tidak valid!")
         return inputCredit()
@@ -51,7 +51,7 @@ def inputCredit():
 def showItem():
     print("Item yang tesedia: ")
     for i in range(0, len(inventory[0])):
-        print(f"{i+1}. {inventory[0][i]} Harga: {inventory[1][i]} Jumlah: {inventory[2][i]}", end="")
+        print(f"{i+1}. {inventory[0][i]}, Harga: Rp {inventory[1][i]}, Jumlah: {inventory[2][i]}", end="")
         if(inventory[2][i]==0):
             print(", Habis!", end="")
         print()    
@@ -99,8 +99,8 @@ def printReceipt(credit, userList):
         print(f"{i}. {inventory[0][userList[i]-1]}")
         if(userList[i+1]==0):
             check = False
-    print(f"Total Pembelian : {sum}")
-    print(f"Kembalian Credit: {credit}\n\n")
+    print(f"Total Pembelian : Rp {sum}")
+    print(f"Kembalian Credit: Rp {credit}\n\n")
 
 # Fungsi printAscii
 # Deskripsi: Fungsi untuk mengoutput ASCII ART sebagai dekorasi interface
@@ -131,8 +131,8 @@ while(state == 1):
     count = 0
     while(Act == True):
         printAscii()
-        print(f"Credit tersisa: {credit}")
-        print(f"Total Pembelian: {sum}")
+        print(f"Credit tersisa: Rp {credit}")
+        print(f"Total Pembelian: Rp {sum}")
         selection = displayMenu(inventory)
         if(selection == 1):
             clearScreen()
