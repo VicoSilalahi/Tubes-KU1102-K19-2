@@ -34,13 +34,17 @@ def initialize():
 def displayMenu(inventory):
     print("1. Input Credit\n2. Pilih Item\n3. Ambil Kembalian dan Tutup Sesi\n4. Matikan Mesin")
     selection = int(input("Masukkan angka opsi: "))
-    return selection
+    if(selection>4):
+        clearScreen()
+        print("Opsi tidak valid!")
+    else:
+        return selection
 
 # Fungsi inputCredit()
 # Deskrispi: Fungsi untuk menambah credit setelah pengisian credit awal
 def inputCredit():
-    credit = int(input("Masukkan credit: "))
-    if(credit<=0):
+    credit = int(input("Masukkan credit (0 untuk kembali): "))
+    if(credit<0):
         print("Credit tidak valid!")
         return inputCredit()
     clearScreen()
@@ -61,7 +65,10 @@ def showItem():
 def selItem(inventory, sum, credit, count, userList):
     showItem()
     selection = int(input("Nomor item yang ingin dibeli: "))
-    if(inventory[2][selection-1]>0):
+    if(selection>len(inventory)):
+        clearScreen()
+        print("Indeks item tidak ada, input item yang valid")
+    elif(inventory[2][selection-1]>0):
         if(inventory[1][selection-1]<=credit):
             sum = sum + inventory[1][selection-1]
             count += 1
@@ -101,6 +108,8 @@ def printReceipt(credit, userList):
             check = False
     print(f"Total Pembelian : {sum}")
     print(f"Kembalian Credit: {credit}\n\n")
+    userList = [0]*100
+    
 
 # Fungsi printAscii
 # Deskripsi: Fungsi untuk mengoutput ASCII ART sebagai dekorasi interface
